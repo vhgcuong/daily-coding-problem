@@ -7,15 +7,20 @@ For example, given [10, 7, 76, 415], you should return 77641510.
 import argparse
 
 
-def cli_input():
+def first_number(element):
+    text = str(element)
+    return text[:1]
+
+def largest_number():
     parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('integers', nargs='*', type=int)
     args = parser.parse_args()
 
-    print(f"{args}")
+    lst = args.integers
+    lst.sort(key=first_number, reverse=True)
 
-    pass
-
+    return ''.join(str(item) for item in lst)
+    
 
 if __name__ == "__main__":
-    cli_input()
-    pass
+    print(largest_number())
