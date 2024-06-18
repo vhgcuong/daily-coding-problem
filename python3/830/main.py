@@ -8,15 +8,14 @@ import argparse
 
 
 def first_number(element):
-    text = str(element)
-    return text[:1]
+    return element[:1]
 
 def largest_number():
     parser = argparse.ArgumentParser(description='Process some integers.')
     parser.add_argument('integers', nargs='*', type=int)
     args = parser.parse_args()
 
-    lst = args.integers
+    lst = list(map(str, args.integers))
     lst.sort(key=first_number, reverse=True)
 
     return ''.join(str(item) for item in lst)
