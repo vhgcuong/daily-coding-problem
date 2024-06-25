@@ -17,16 +17,22 @@ The order of the indices does not matter.
 """
 
 import itertools
+import random
 
 
 def find_concatenation(str_example: str, words: list):
     permutations = itertools.permutations(words)
-
+    for item in permutations:
+        print(list(item))
     
     pass
 
 
+def generate_words(words: list, n: int = 100):
+    return ''.join(random.choice(words) for _ in range(100))
+
+
 if __name__ == "__main__":
 
-    print(f"find concatenation: {find_concatenation("barfoobazbitbyte", ["dog", "cat"])}")
+    print(f"""find concatenation: {find_concatenation("barfoobazbitbyte", ["dog", "cat"])}""")
     pass
