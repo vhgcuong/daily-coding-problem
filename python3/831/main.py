@@ -17,22 +17,27 @@ The order of the indices does not matter.
 """
 
 import itertools
-import random
+import argparse
 
 
 def find_concatenation(str_example: str, words: list):
-    permutations = itertools.permutations(words)
+    result = []
+    permutations = ["".join(item) for item in itertools.permutations(words)]
+
     for item in permutations:
-        print(list(item))
+        result += [i for i in range(len(str_example)) if str_example.startswith(item, i)]
     
-    pass
-
-
-def generate_words(words: list, n: int = 100):
-    return ''.join(random.choice(words) for _ in range(100))
+    return result
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description='Process find all starting indices of substrings.'
+    )
+    parser.add_argument('--string', type=str, required=True)
+    parser.add_argument('--words', nargs='*', type=str, required=True, help="list of words words")
+    args = parser.parse_args()
 
-    print(f"""find concatenation: {find_concatenation("barfoobazbitbyte", ["dog", "cat"])}""")
-    pass
+    print("Text: ", args.string)
+    print("words: ", args.words)
+    print(find_concatenation(args.string, args.words))
